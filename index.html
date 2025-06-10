@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JV.Criativo - Portfólio de Designer Gráfico</title>
+    
+    <!-- Tailwind CSS para utilitários de estilo rápidos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Estilos Globais e Animações -->
+    <style>
+        :root {
+            --background: #0A0E14;
+            --surface: #11151C;
+            --primary: #F97316;
+            --secondary: #EF4444;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+        }
+
+        html {
+           scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== Scrollbar CSS ===== */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
+            border: 3px solid #0a0a0a;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 4s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1), 0 0 40px -10px rgba(249, 115, 22, 0.3);
+        }
+
+        .toast-notification {
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        .decorative-shape {
+            transition: transform 0.4s ease-out;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-700">
+        <div class="flex items-center gap-4">
+            <img src="https://i.imgur.com/N7Pua0N.png" alt="JV.Criativo Logo" class="h-16 w-16"/>
+           <span class="text-4xl font-black tracking-tighter text-slate-200">JV.Criativo</span>
+        </div>
+        <div class="w-64 mt-8 bg-slate-700/50 rounded-full h-2 overflow-hidden">
+            <div id="preloader-bar" class="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <p class="mt-4 text-lg text-slate-400 tracking-wider">Carregando Experiência...</p>
+    </div>
+
+    <!-- Cabeçalho -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-24">
+        <div class="container mx-auto px-6 flex justify-between items-center h-full">
+            <a href="#inicio" class="flex items-center gap-3">
+                <img src="https://i.imgur.com/N7Pua0N.png" alt="JV.Criativo Logo" id="navbar-logo" class="h-12 transition-all duration-300"/>
+                <span id="navbar-text" class="text-slate-100 font-black tracking-tighter text-3xl transition-all duration-300 hidden sm:inline">JV.Criativo</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-2" id="desktop-nav">
+                <a href="#inicio" class="nav-link relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors">Início</a>
+                <a href="#sobre" class="nav-link relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors">Sobre</a>
+                <a href="#portfolio" class="nav-link relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors">Portfólio</a>
+                <a href="#inspiracoes" class="nav-link relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors">Inspirações</a>
+                <a href="#contato" class="nav-link relative px-4 py-2 text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors">Contato</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden z-50">
+                <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="md:hidden absolute top-0 left-0 w-full bg-slate-900/95 backdrop-blur-lg pt-24 transform -translate-y-full transition-transform duration-300 ease-in-out">
+            <nav class="flex flex-col items-center gap-4 p-6">
+                <a href="#inicio" class="nav-link-mobile w-full text-center py-3 text-lg font-medium rounded-lg">Início</a>
+                <a href="#sobre" class="nav-link-mobile w-full text-center py-3 text-lg font-medium rounded-lg">Sobre</a>
+                <a href="#portfolio" class="nav-link-mobile w-full text-center py-3 text-lg font-medium rounded-lg">Portfólio</a>
+                <a href="#inspiracoes" class="nav-link-mobile w-full text-center py-3 text-lg font-medium rounded-lg">Inspirações</a>
+                <a href="#contato" class="nav-link-mobile w-full text-center py-3 text-lg font-medium rounded-lg">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção Hero -->
+        <section id="inicio" class="min-h-screen flex items-center justify-center text-center px-4 relative overflow-hidden">
+             <!-- Efeitos de gradiente no fundo -->
+            <div class="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-orange-500/10 rounded-full filter blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-red-500/10 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
+
+            <div class="absolute top-0 left-0 w-full h-full bg-no-repeat bg-center" style="background-image: radial-gradient(ellipse 80% 50% at 50% -20%,rgba(120,119,198,0.1),hsla(0,0%,100%,0));"></div>
+            <div class="absolute inset-0 bg-slate-950/50"></div>
+        
+            <!-- Elementos flutuantes decorativos -->
+            <div class="decorative-shape absolute top-[15%] left-[10%] w-8 h-8 text-orange-500 opacity-30"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+            <div class="decorative-shape absolute top-[25%] right-[12%] w-10 h-10 text-red-500 opacity-30"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.7.8 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg></div>
+            <div class="decorative-shape absolute bottom-[20%] left-[20%] w-9 h-9 text-orange-400 opacity-30"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="10.5" cy="14.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.668 0-.437-.18-.835-.437-1.108-.257-.273-.666-.698-.666-1.672 0-1.112.512-1.674 1.284-2.173.131-.086.264-.173.397-.26.492-.32.984-.64 1.476-.96.493-.32.985-.64 1.477-.96.493-.32.985-.64 1.477-.96.493-.32.985-.64 1.477-.96.493-.32.985-.64 1.477-.96.493-.32.985-.64 1.477-.96l.63-.42c1.26-.84 2.1-2.24 2.1-3.84C22 3.96 20.48 2 18 2c-1.55 0-2.93.79-3.75 2Z"></path></svg></div>
+
+        
+            <div class="relative z-10" id="hero-content">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-slate-100 tracking-tighter">Design Que<br /><span class="gradient-text">Eleva & Inspira</span></h1>
+                <p class="mt-6 max-w-xl mx-auto text-lg md:text-xl text-slate-300/90">
+                    Bem-vindo ao meu universo criativo, onde cada pixel conta uma história. Transformo conceitos em visuais extraordinários que capturam a essência da sua marca.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#portfolio" class="px-8 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-lg shadow-lg hover:shadow-orange-500/50 transition-all duration-300 transform hover:scale-105">
+                        Ver Meus Trabalhos
+                    </a>
+                    <a href="#contato" class="px-8 py-3 border-2 border-orange-400 text-orange-300 font-bold rounded-lg bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 transform hover:scale-105">
+                        Vamos Conversar
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section id="sobre" class="py-24 sm:py-32 bg-slate-900">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter gradient-text">Sobre Minha Jornada Criativa</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-400">Com 22 anos e uma paixão por transformar ideias em realidade visual, trago 5 anos de experiência e dedicação para cada projeto, buscando sempre superar expectativas e entregar resultados excepcionais e memoráveis.</p>
+                </div>
+                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+                    <div class="lg:col-span-2 group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl blur-lg opacity-60 group-hover:opacity-100 transition duration-500"></div>
+                        <img src="https://i.imgur.com/lCHaXz0.jpeg" alt="Foto de João Vitor" class="relative w-full h-auto rounded-xl shadow-2xl">
+                    </div>
+                    <div class="lg:col-span-3">
+                         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                            <div class="card-hover bg-slate-800/50 p-6 rounded-xl text-center border border-slate-700">
+                                <p class="text-3xl font-bold text-white">70+</p><p class="text-sm text-slate-400">Projetos Concluídos</p>
+                            </div>
+                            <div class="card-hover bg-slate-800/50 p-6 rounded-xl text-center border border-slate-700">
+                                <p class="text-3xl font-bold text-white">45+</p><p class="text-sm text-slate-400">Clientes Satisfeitos</p>
+                            </div>
+                            <div class="card-hover bg-slate-800/50 p-6 rounded-xl text-center border border-slate-700">
+                                <p class="text-3xl font-bold text-white">5+</p><p class="text-sm text-slate-400">Anos de Experiência</p>
+                            </div>
+                             <div class="card-hover bg-slate-800/50 p-6 rounded-xl text-center border border-slate-700">
+                                <p class="text-3xl font-bold text-white">100%</p><p class="text-sm text-slate-400">Paixão por Design</p>
+                            </div>
+                         </div>
+                        <h3 class="text-2xl font-bold text-white mb-6">Meus Serviços:</h3>
+                         <div class="flex flex-wrap gap-4">
+                            <span class="flex items-center gap-3 bg-slate-800 px-4 py-2 rounded-full"><span class="h-3 w-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500"></span>Social Media</span>
+                            <span class="flex items-center gap-3 bg-slate-800 px-4 py-2 rounded-full"><span class="h-3 w-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500"></span>Criação de Logo</span>
+                            <span class="flex items-center gap-3 bg-slate-800 px-4 py-2 rounded-full"><span class="h-3 w-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500"></span>Arte & Ilustração</span>
+                            <span class="flex items-center gap-3 bg-slate-800 px-4 py-2 rounded-full"><span class="h-3 w-3 rounded-full bg-gradient-to-r from-orange-500 to-red-500"></span>Pacote de Artes</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Portfólio -->
+        <section id="portfolio" class="py-24 sm:py-32">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter gradient-text">Projetos Que Falam Por Si</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/iYJ6AgD.jpeg" alt="Projeto 1" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/GEVN7UF.jpeg" alt="Projeto 2" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/o37coK9.jpeg" alt="Projeto 3" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/eqLfbnu.jpeg" alt="Projeto 4" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/w36qxMf.jpeg" alt="Projeto 5" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                    <div class="card-hover rounded-xl overflow-hidden group"><img src="https://i.imgur.com/K1EtQPJ.jpeg" alt="Projeto 6" class="w-full h-full object-cover aspect-square transition-transform duration-500 group-hover:scale-110"></div>
+                </div>
+             </div>
+        </section>
+        
+        <!-- Seção Inspirações -->
+        <section id="inspiracoes" class="py-24 sm:py-32 bg-slate-900">
+             <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter gradient-text">Minhas Inspirações</h2>
+                     <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-400">Um vislumbre do meu processo criativo e inspirações. Veja mais em <a href="https://instagram.com/jv.criativo" target="_blank" rel="noopener noreferrer" class="font-bold text-orange-400 hover:underline">@jv.criativo</a>.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                     <a href="https://www.instagram.com/jv.criativo/" target="_blank" class="card-hover rounded-xl overflow-hidden group relative block">
+                        <img src="https://i.imgur.com/i9ytrVD.jpeg" alt="Inspiração 1" class="w-full h-full object-cover aspect-video transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                            <p class="text-white text-sm">Explorando novas texturas e formas no design de embalagens. #packagingdesign #inovacao</p>
+                            <div class="flex items-center gap-4 mt-2 text-white font-bold text-sm"><span class="flex items-center gap-1">❤️ 125</span> <span class="flex items-center gap-1">💬 12</span></div>
+                        </div>
+                     </a>
+                      <a href="https://www.instagram.com/jv.criativo/" target="_blank" class="card-hover rounded-xl overflow-hidden group relative block">
+                        <img src="https://i.imgur.com/o37coK9.jpeg" alt="Inspiração 2" class="w-full h-full object-cover aspect-video transition-transform duration-500 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                            <p class="text-white text-sm">Estudo de cores e tipografia para um novo projeto de branding. #branding #designgrafico</p>
+                             <div class="flex items-center gap-4 mt-2 text-white font-bold text-sm"><span class="flex items-center gap-1">❤️ 210</span> <span class="flex items-center gap-1">💬 34</span></div>
+                        </div>
+                     </a>
+                      <a href="https://www.instagram.com/jv.criativo/" target="_blank" class="card-hover rounded-xl overflow-hidden group relative block">
+                        <img src="https://i.imgur.com/iYJ6AgD.jpeg" alt="Inspiração 3" class="w-full h-full object-cover aspect-video transition-transform duration-500 group-hover:scale-110">
+                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end">
+                            <p class="text-white text-sm">Bastidores da criação de uma identidade visual completa. #logo #designprocess</p>
+                             <div class="flex items-center gap-4 mt-2 text-white font-bold text-sm"><span class="flex items-center gap-1">❤️ 188</span> <span class="flex items-center gap-1">💬 21</span></div>
+                        </div>
+                     </a>
+                </div>
+             </div>
+        </section>
+
+        <!-- Seção Contato -->
+        <section id="contato" class="py-24 sm:py-32">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter gradient-text">Vamos Criar Algo Incrível Juntos?</h2>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 bg-slate-900 border border-slate-800 p-8 rounded-xl">
+                    <div class="flex flex-col justify-center gap-6">
+                         <div>
+                            <h3 class="font-bold text-lg text-white">Email</h3>
+                            <a href="mailto:contato.jvcriativo@gmail.com" class="text-slate-400 hover:text-orange-400 transition-colors">contato.jvcriativo@gmail.com</a>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">WhatsApp</h3>
+                            <a href="https://wa.me/5513997010450" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">(13) 99701-0450</a>
+                        </div>
+                         <div>
+                            <h3 class="font-bold text-lg text-white">Instagram</h3>
+                            <a href="https://instagram.com/jv.criativo" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">@jv.criativo</a>
+                        </div>
+                    </div>
+                     <form id="contact-form">
+                        <input type="text" name="name" placeholder="Seu Nome" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none">
+                        <input type="email" name="email" placeholder="Seu Email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none">
+                        <textarea name="message" placeholder="Sua Mensagem" required rows="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none resize-none"></textarea>
+                        <button type="submit" class="w-full p-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 border-t border-slate-800 pt-16 pb-8 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <a href="#inicio" class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                     <img src="https://i.imgur.com/N7Pua0N.png" alt="JV.Criativo Logo" class="h-10"/>
+                     <span class="text-slate-100 font-bold text-xl">JV.Criativo</span>
+                </a>
+                 <p class="text-slate-400 text-sm max-w-xs mx-auto md:mx-0">Elevando marcas com design criativo, estratégico e impactante.</p>
+            </div>
+             <div>
+                <h3 class="font-bold text-white mb-4">Navegação Rápida</h3>
+                <nav class="flex flex-col space-y-2">
+                     <a href="#inicio" class="text-slate-400 hover:text-orange-400 transition-colors text-sm">Início</a>
+                     <a href="#sobre" class="text-slate-400 hover:text-orange-400 transition-colors text-sm">Sobre Mim</a>
+                     <a href="#portfolio" class="text-slate-400 hover:text-orange-400 transition-colors text-sm">Portfólio</a>
+                     <a href="#contato" class="text-slate-400 hover:text-orange-400 transition-colors text-sm">Contato</a>
+                </nav>
+            </div>
+             <div>
+                 <h3 class="font-bold text-white mb-4">Conecte-se</h3>
+                 <div class="flex justify-center md:justify-start gap-4 mb-4">
+                     <a href="https://instagram.com/jv.criativo" target="_blank" class="text-slate-400 hover:text-orange-400"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                 </div>
+                 <a href="mailto:contato.jvcriativo@gmail.com" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">contato.jvcriativo@gmail.com</a>
+                 <a href="https://wa.me/5513997010450" target="_blank" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">(13) 99701-0450</a>
+            </div>
+        </div>
+        <div class="container mx-auto text-center border-t border-slate-800 mt-8 pt-6">
+             <p class="text-slate-500 text-sm">© 2025 JV.Criativo. Todos os direitos reservados. Desenvolvido com ❤️ e muito café.</p>
+        </div>
+    </footer>
+
+    <!-- Botão Voltar ao Topo -->
+    <a href="#inicio" id="scroll-to-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-orange-500 text-white shadow-lg hidden transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+    </a>
+    
+    <!-- Notificação de Toast -->
+    <div id="toast" class="toast-notification fixed bottom-10 right-10 z-[100] p-4 rounded-lg shadow-2xl bg-green-600 text-white opacity-0 transform translate-y-10">
+        Mensagem enviada com sucesso!
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Preloader ---
+        const preloader = document.getElementById('preloader');
+        const preloaderBar = document.getElementById('preloader-bar');
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+            preloaderBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 700);
+                }, 500);
+            }
+        }, 150);
+
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        const navbarLogo = document.getElementById('navbar-logo');
+        const navbarText = document.getElementById('navbar-text');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900/80', 'backdrop-blur-lg', 'shadow-xl', 'h-20');
+                navbar.classList.remove('h-24');
+                navbarLogo.classList.add('h-10');
+                navbarLogo.classList.remove('h-12');
+                navbarText.classList.add('text-2xl');
+                navbarText.classList.remove('text-3xl');
+            } else {
+                navbar.classList.remove('bg-slate-900/80', 'backdrop-blur-lg', 'shadow-xl', 'h-20');
+                navbar.classList.add('h-24');
+                navbarLogo.classList.remove('h-10');
+                navbarLogo.classList.add('h-12');
+                navbarText.classList.remove('text-2xl');
+                navbarText.classList.add('text-3xl');
+            }
+        });
+
+        // --- Active Nav Link on Scroll ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#desktop-nav .nav-link');
+        const navLinksMobile = document.querySelectorAll('#mobile-menu .nav-link-mobile');
+        
+        function updateActiveLink() {
+            let index = sections.length;
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+            
+            navLinks.forEach((link) => link.classList.remove('text-orange-400'));
+            if(navLinks[index]) navLinks[index].classList.add('text-orange-400');
+            
+            navLinksMobile.forEach((link) => link.classList.remove('bg-orange-500/20', 'text-orange-300'));
+            if(navLinksMobile[index]) navLinksMobile[index].classList.add('bg-orange-500/20', 'text-orange-300');
+        }
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-y-full');
+            menuIconOpen.classList.toggle('hidden');
+            menuIconClose.classList.toggle('hidden');
+        });
+        
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', () => {
+                 mobileMenu.classList.add('-translate-y-full');
+                 menuIconOpen.classList.remove('hidden');
+                 menuIconClose.classList.add('hidden');
+            });
+        });
+
+        // --- Scroll to Top Button ---
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.remove('hidden');
+            } else {
+                scrollToTopBtn.classList.add('hidden');
+            }
+        });
+
+        // --- Contact Form ---
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+            }, 3000);
+            contactForm.reset();
+        });
+
+        // --- Hero Section Parallax Effect ---
+        const heroContent = document.getElementById('hero-content');
+        const decorativeShapes = document.querySelectorAll('.decorative-shape');
+        document.getElementById('inicio').addEventListener('mousemove', (e) => {
+            const { clientX, clientY, currentTarget } = e;
+            const { offsetWidth, offsetHeight } = currentTarget;
+            const xPos = (clientX / offsetWidth - 0.5) * 2;
+            const yPos = (clientY / offsetHeight - 0.5) * 2;
+
+            requestAnimationFrame(() => {
+                heroContent.style.transform = `translate(${xPos * -10}px, ${yPos * -10}px)`;
+                decorativeShapes.forEach((shape, i) => {
+                    const speed = (i + 1) * 5;
+                    shape.style.transform = `translate(${xPos * speed}px, ${yPos * speed}px)`;
+                });
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>
