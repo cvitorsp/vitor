@@ -253,21 +253,28 @@
                     <div class="flex flex-col justify-center gap-6">
                          <div>
                             <h3 class="font-bold text-lg text-white">Email</h3>
-                            <a href="mailto:contato.jvcriativo@gmail.com" class="text-slate-400 hover:text-orange-400 transition-colors">contato.jvcriativo@gmail.com</a>
+                            <a href="mailto:cvitorsp@gmail.com" class="text-slate-400 hover:text-orange-400 transition-colors">cvitorsp@gmail.com</a>
                         </div>
                         <div>
                             <h3 class="font-bold text-lg text-white">WhatsApp</h3>
-                            <a href="https://wa.me/5513997010450" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">(13) 99701-0450</a>
+                            <a href="https://wa.me/5511915622409" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">(11) 91562-2409</a>
                         </div>
                          <div>
                             <h3 class="font-bold text-lg text-white">Instagram</h3>
                             <a href="https://instagram.com/jv.criativo" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-orange-400 transition-colors">@jv.criativo</a>
                         </div>
                     </div>
-                     <form id="contact-form">
+                     <form id="contact-form" action="https://formsubmit.co/cvitorsp@gmail.com" method="POST">
                         <input type="text" name="name" placeholder="Seu Nome" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none">
                         <input type="email" name="email" placeholder="Seu Email" required class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none">
+                        <input type="tel" name="whatsapp" placeholder="Seu WhatsApp (Opcional)" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none">
                         <textarea name="message" placeholder="Sua Mensagem" required rows="4" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-orange-500 outline-none resize-none"></textarea>
+                        
+                        <!-- Configurações do FormSubmit -->
+                        <input type="hidden" name="_next" value="https://cvitorsp.github.io/vitor/"> <!-- MUDE ISSO -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="Novo Contato do Portfólio!">
+
                         <button type="submit" class="w-full p-3 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-lg hover:opacity-90 transition-opacity">Enviar Mensagem</button>
                     </form>
                 </div>
@@ -299,8 +306,8 @@
                  <div class="flex justify-center md:justify-start gap-4 mb-4">
                      <a href="https://instagram.com/jv.criativo" target="_blank" class="text-slate-400 hover:text-orange-400"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                  </div>
-                 <a href="mailto:contato.jvcriativo@gmail.com" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">contato.jvcriativo@gmail.com</a>
-                 <a href="https://wa.me/5513997010450" target="_blank" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">(13) 99701-0450</a>
+                 <a href="mailto:cvitorsp@gmail.com" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">cvitorsp@gmail.com</a>
+                 <a href="https://wa.me/5511915622409" target="_blank" class="block text-slate-400 hover:text-orange-400 transition-colors text-sm">(11) 91562-2409</a>
             </div>
         </div>
         <div class="container mx-auto text-center border-t border-slate-800 mt-8 pt-6">
@@ -347,15 +354,19 @@
                 navbar.classList.remove('h-24');
                 navbarLogo.classList.add('h-10');
                 navbarLogo.classList.remove('h-12');
-                navbarText.classList.add('text-2xl');
-                navbarText.classList.remove('text-3xl');
+                if (navbarText) {
+                    navbarText.classList.add('text-2xl');
+                    navbarText.classList.remove('text-3xl');
+                }
             } else {
                 navbar.classList.remove('bg-slate-900/80', 'backdrop-blur-lg', 'shadow-xl', 'h-20');
                 navbar.classList.add('h-24');
                 navbarLogo.classList.remove('h-10');
                 navbarLogo.classList.add('h-12');
-                navbarText.classList.remove('text-2xl');
-                navbarText.classList.add('text-3xl');
+                 if (navbarText) {
+                    navbarText.classList.remove('text-2xl');
+                    navbarText.classList.add('text-3xl');
+                 }
             }
         });
 
@@ -412,11 +423,42 @@
         const toast = document.getElementById('toast');
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            toast.classList.remove('opacity-0', 'translate-y-10');
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-10');
-            }, 3000);
-            contactForm.reset();
+            const formData = new FormData(contactForm);
+            
+            // Substitua 'SEU-DOMINIO.github.io' pelo seu link real do GitHub Pages
+            const nextUrl = contactForm.querySelector('input[name="_next"]');
+            if (nextUrl && location.hostname) {
+                 nextUrl.value = `https://${location.hostname}`;
+            }
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    toast.classList.remove('opacity-0', 'translate-y-10');
+                    setTimeout(() => {
+                        toast.classList.add('opacity-0', 'translate-y-10');
+                    }, 3000);
+                    contactForm.reset();
+                } else {
+                     response.json().then(data => {
+                        if (data.error === "Enable reCAPTCHA") {
+                             alert("Por favor, ative seu formulário. Verifique seu e-mail para a mensagem de ativação do FormSubmit.");
+                        } else {
+                             alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+                        }
+                     });
+                }
+            })
+            .catch(error => {
+                alert('Ocorreu um erro ao enviar a mensagem. Tente novamente.');
+                console.error('Fetch Error:', error);
+            });
         });
 
         // --- Hero Section Parallax Effect ---
@@ -429,7 +471,7 @@
             const yPos = (clientY / offsetHeight - 0.5) * 2;
 
             requestAnimationFrame(() => {
-                heroContent.style.transform = `translate(${xPos * -10}px, ${yPos * -10}px)`;
+                if(heroContent) heroContent.style.transform = `translate(${xPos * -10}px, ${yPos * -10}px)`;
                 decorativeShapes.forEach((shape, i) => {
                     const speed = (i + 1) * 5;
                     shape.style.transform = `translate(${xPos * speed}px, ${yPos * speed}px)`;
